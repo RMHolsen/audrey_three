@@ -1,15 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BlogFlash</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+<style>
+p {
+  font-family: Verdana, sans-serif;
+  font-size: 12pt;
+}
+
+a {
+  text-decoration: none;
+}
+
+.menu {
+    margin: 0px 10px 0px 10px;
+    float: left;
+    width: 25%;
+}
+
+.main {
+    margin: 0px 10px 0px 10px;
+    width: 50%;
+    float: left;
+}
+
+.fake-link {
+    color: blue;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.title {
+  text-align: center;
+}
+</style>
+  <title>Research Repository</title>
   <%= yield :title %>
 </head>
+
 <body>
+<h1 class="title">The Research Repository</h1>
 
+<div class="menu">
+<p class="fake-link">Log In</p>
+</div>
+
+<div class="main">
 <%= yield %>
-
+</div>
 </body>
 </html>

@@ -11,6 +11,15 @@ Rails.application.routes.draw do
 
   #resources :posts, only: [:index, :show, :new, :create, :edit, :update]
 
-  root 'posts#index'
+  resources :projects do 
+    resources :lists, only: [:show, :new, :create, :edit, :update]
+  end 
+
+  resources :lists
+  resources :items
+  resources :sources 
+  #resources :users
+  
+  root 'static#index'
 
 end

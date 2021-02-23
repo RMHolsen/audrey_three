@@ -1,0 +1,7 @@
+<h2>Projects Available</h2>
+
+<% @projects.each do |p| %>
+    <ul>
+    <li><%= link_to p.name, project_path(p) %> </li>
+    </ul>
+<% end %>
