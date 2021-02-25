@@ -1,6 +1,5 @@
 ## To-Do
--- Double-check associations and that everything ticks all the boxes.
--- Make the basics: views, controller (project controller has prelim stub)
+-- Make the basics: views
 -- Check boolean validations? Maybe I don't, really. It's got to be either true or false. Eh, give this some more thought. 
 -- Dig up that stupid pluralize count method format thingie, it can be applied to projects for how many lists they have.
 -- Review the has_many through with comments for how a user can submit a topic with a name and then have it belong to both a project and a list, how those associations get drawn, etc. Maybe practice this a bit in alpha or elsewhere.

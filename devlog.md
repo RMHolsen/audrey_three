@@ -8,3 +8,8 @@ Added an assload of migrations and some notes to the project about labs to look 
 Added routes, tentatively, including nested routes
 Added css and minor styling to application layout, added a static controller for the index page and in case of further need for static pages, maybe one on sources, maybe one with citation formatting, IDK.
 Added some rspec tests on account of the damn local server not working, stubbed out projects controller and project views 
+Filled out the Readme. 
+
+## 24 February 2021
+Added basic controllers for all models. 
+Topped off basic views with partial for Projects

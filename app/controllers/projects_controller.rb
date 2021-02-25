@@ -42,9 +42,9 @@ class ProjectsController < ApplicationController
         end 
     end 
 
-    def destroy
-        #can't remember go find this code
-    end 
+    # def destroy
+    #     #can't remember go find this code
+    # end 
 
     private
 
