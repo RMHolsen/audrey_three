@@ -3,5 +3,5 @@ class Project < ActiveRecord::Base
     
     has_many :topics 
     has_many :lists, through: :topics 
-    #belongs_to :user 
+    belongs_to :user 
 end 

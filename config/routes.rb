@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   resources :items
   resources :sources 
   #resources :users
+
+  #get '/signup', to: 'users#new'
+  #post '/signup', to: 'users#create'
+  #get '/login', to: 'sessions#new'
+  #post '/login', to: 'sessions#create'
+  #get '/logout', to: 'sessions#destroy'
   
   root 'static#index'
 

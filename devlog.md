@@ -13,3 +13,9 @@ Filled out the Readme.
 ## 24 February 2021
 Added basic controllers for all models. 
 Topped off basic views with partial for Projects
+
+## 25 February 2021
+Added user/sessions controller and views, user migration, user model, partially coded each
+(Go over this to make sure all the code works, you were definitely not awake)
+
+
