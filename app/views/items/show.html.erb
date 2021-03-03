@@ -1,0 +1,16 @@
+<h1><%= @item.name %></h1>
+<p><strong>By:</strong> <%= @item.creator %></p>
+<p><strong>Type of Resource:</strong> <%= @item.material %></p>
+<p><strong>Publication Date:</strong> <%= @item.publication_date %></p>
+
+<h3>Available At</h3>
+<% @sources.each do |s| %>
+    <p><%= s.name %> -- <%= s.location %><br>
+    <% if s.fee == true %>
+    There is a fee.
+    <% end %><br>
+    <strong>Point of Contact:</strong> <%= s.contact %>
+    </p>
+<% end %>
+<br>
+<p><%= link_to @item.list.name, list_path(@item.list) %></p>

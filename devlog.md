@@ -18,4 +18,10 @@ Topped off basic views with partial for Projects
 Added user/sessions controller and views, user migration, user model, partially coded each
 (Go over this to make sure all the code works, you were definitely not awake)
 
+## 26 February 2021
+Adding List and Item controllers, views, relationships, tweaking routes a bit.
 
+## 3 March 2021
+Built List and Item views
+Added destroy method to Projects, Lists, Items controllers
+Built tests for List and Item views, passed tests

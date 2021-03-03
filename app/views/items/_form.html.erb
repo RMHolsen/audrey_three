@@ -1,0 +1,18 @@
+<p><%= f.label :name %> 
+<%= f.text_field :name %></p>
+
+<p><%= f.label "List" %> <%= f.text_field :name, list: "lists_autocomplete" %>
+<datalist id="lists_autocomplete">
+    <% @lists.each do |list| %>
+        <option value="<%= list.name %>">
+    <% end %>
+</datalist>
+</p>
+
+<p><%= f.label :material %>
+<%= f.text_field :material %> (such as book, CD, episode of TV, film, etc.)</p>
+<p><%= f.label :creator %>
+<%= f.text_field :creator %> (primary author or editor)</p>
+<p><%= f.label :publication_date %>
+<%= f.label :publication_date %></p>
+<br>

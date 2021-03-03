@@ -1,31 +1,42 @@
 class ItemsController < ApplicationController
-    before_action :set_item, only: [:show, :edit, :update]
+    before_action :set_item, only: [:show, :edit, :update, :destroy]
     
-    def index
-        @items = Item.all 
-    end 
+    # def index
+    #     Leaving this here just in case, but there doesn't really seem to be a need for an items index right now.
+    #     @items = Item.all 
+    # end 
 
     def show 
+        @sources = @item.sources 
     end 
 
     def new
         @item = Item.new 
+        @lists = List.all 
+        #Restrict this only to user lists when login function is built 
+        #@list = List.find(params[:list_id])
     end 
 
     def create
+        #@list = List.find(params[:list_id])
+        #@item = @list.items.build(item_params)
         @item = Item.new(item_params)
+        @item.list = List.find_or_create_by(list_params)
         if @item.valid?
             @item.save
-            redirect_to @item
+            redirect_to @list
         else
             render :new
         end 
     end 
 
     def edit
+        @lists = List.all 
+        #Restrict this only to user lists when login function is built
     end 
 
     def update
+        #@list = List.find(params[:list_id])
         if @item.update(item_params)
             redirect_to @item
         else 
@@ -44,5 +55,9 @@ class ItemsController < ApplicationController
 
     def item_params
         params.require(:item).permit(:name, :material, :creator, :publication_date)
+    end 
+
+    def list_params
+        params.require(:list).permit(:name)
     end 
 end 

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController 
-    before_action :set_project, only: [:show, :edit, :update]
+    before_action :set_project, only: [:show, :edit, :update, :destroy]
 
     def index
         #logged_in and current_user 
@@ -42,9 +42,10 @@ class ProjectsController < ApplicationController
         end 
     end 
 
-    # def destroy
-    #     #can't remember go find this code
-    # end 
+    def destroy
+         @project.destroy 
+         redirect_to projects_path
+    end 
 
     private
 

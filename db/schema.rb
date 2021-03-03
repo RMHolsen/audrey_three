@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210223182300) do
+ActiveRecord::Schema.define(version: 20210226002501) do
 
   create_table "item_sources", force: :cascade do |t|
     t.integer "source_id"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(version: 20210223182300) do
     t.integer "list_id"
     t.index ["list_id"], name: "index_topics_on_list_id"
     t.index ["project_id"], name: "index_topics_on_project_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "profile"
+    t.string "password_digest"
   end
 
 end

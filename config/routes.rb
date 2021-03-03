@@ -8,17 +8,18 @@ Rails.application.routes.draw do
   #   resources :posts, only: [:show, :index]
   # end 
 
+  resources :projects #do 
+    #resources :lists, only: [:show, :new, :create, :edit, :update]
+  #end 
+  #Originally intended to have lists nested under projects but maybe it makes more sense to have items nested under lists
+  #Since lists may be useful across more than one project?
+  #Either way it definitely makes sense to have items nested under lists. 
 
-  #resources :posts, only: [:index, :show, :new, :create, :edit, :update]
-
-  resources :projects do 
-    resources :lists, only: [:show, :new, :create, :edit, :update]
+  resources :lists do 
+    resources :items 
   end 
-
-  resources :lists
-  resources :items
   resources :sources 
-  #resources :users
+  resources :users
 
   #get '/signup', to: 'users#new'
   #post '/signup', to: 'users#create'
