@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end 
   resources :sources 
   resources :users
+  resources :topics 
 
   #get '/signup', to: 'users#new'
   #post '/signup', to: 'users#create'

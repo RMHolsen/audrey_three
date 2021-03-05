@@ -2,4 +2,17 @@
 <p><strong>Description:</strong> <%= @project.description %></p>
 <p><strong>Summary or Synopsis:</strong> <%= @project.summary %></p>
 
-<%= link_to "Edit Project", edit_project_path(@project) %> 
+<p><strong>Topics for Research</strong><br>
+<% @project.topics.each do |topic| %>
+    <%= topic.name %> - 
+    <% if topic.list %>
+    <%= link_to topic.list.name, list_path(topic.list) %><br>
+    <% else %>
+    <%= link_to "Create a wish list for this topic", new_list_path %><br>
+    <% end %>
+<% end %></p>
+
+<br>
+<%= render 'topics/new' %>
+
+<p><%= link_to "Edit Project", edit_project_path(@project) %></p>

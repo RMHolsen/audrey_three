@@ -24,6 +24,8 @@ class ItemsController < ApplicationController
         @item.list = List.find_or_create_by(list_params)
         if @item.valid?
             @item.save
+            #If @item.source_ids == true, redirect_to @list
+            #else redirect_to @list, flash message you may want to add more information about the source
             redirect_to @list
         else
             render :new
@@ -54,7 +56,7 @@ class ItemsController < ApplicationController
     end 
 
     def item_params
-        params.require(:item).permit(:name, :material, :creator, :publication_date)
+        params.require(:item).permit(:name, :material, :creator, :publication_date, source_ids:[], sources_attributes: [:name])
     end 
 
     def list_params

@@ -18,3 +18,32 @@ fuckers
   <p><%= link_to "Log In", login_path %></p>
   <p><%= link_to "Create an Account", signup_path %></p>
   <% end %>
+
+  ## SOURCES/ITEMS CODE
+   def post_params
+    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
+    #Category_IDs to identify the categories already existing to associate the post with
+    #Categories_attributes to create a new category to associate the post with, see: model methods
+  end
+
+  <% Category.all.each do |c| %>
+<p><label for="category_id_<%= c.id %>"> <%= c.name %></label>
+<input type="checkbox" name="post[category_ids][]" value="<%= c.id %>" id="category_id_<%= c.id %>">
+</p>
+<% end %>
+
+  def categories_attributes=(category_attributes)
+    category_attributes.values.each do |category_attribute|
+      category = Category.find_or_create_by(category_attribute)
+      self.post_categories.build(category: category)
+    end
+  end
+
+
+## WELL, THIS DIDN'T WORK
+<%= form_for @project.topics.build do |f| %>
+    <%= f.label "Add a Topic" %>
+    <%= f.text_field :name %>
+    <%= f.hidden_field :project_id, value: @project.id %>
+    <%= f.submit %>
+<% end %>

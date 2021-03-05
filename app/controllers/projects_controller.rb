@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
     end 
 
     def show
+        @topic = Topic.new 
     end 
 
     def new
@@ -19,7 +20,7 @@ class ProjectsController < ApplicationController
         #Create a new project using the fed params
         if @project.valid? 
             @project.save
-            redirect_to project_view(@project)
+            redirect_to project_path(@project)
             #If the project is valid according to all validations in the model, save the project
             #Redirect to show the project
         else 

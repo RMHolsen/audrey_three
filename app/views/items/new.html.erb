@@ -1,4 +1,7 @@
 <%= form_for([@list, @item]) do |f| %>
     <%= render 'form' %>
+
+    <%= f.collection_check_boxes(:source_ids, Source.all, :id, :name)
+
     <%= f.submit "Add New Item" %>
 <% end %>

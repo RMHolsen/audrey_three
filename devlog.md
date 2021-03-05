@@ -25,3 +25,8 @@ Adding List and Item controllers, views, relationships, tweaking routes a bit.
 Built List and Item views
 Added destroy method to Projects, Lists, Items controllers
 Built tests for List and Item views, passed tests
+
+## 4 March 2021
+Built Add Topic form as a partial, added to Project show view
+Built topic display method on Project show view, added if function to show links to the lists if they exist and "add a list for this topic" if they don't.
+Built tests for Project show view 

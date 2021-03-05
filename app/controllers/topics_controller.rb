@@ -16,9 +16,9 @@ class TopicsController < ApplicationController
         @topic = Topic.new(topic_params)
         if @topic.valid? 
             @topic.save 
-            redirect_to @topic
+            redirect_to project_path(@topic.project)
         else 
-            render :new
+            render :"projects/new"
         end 
     end 
 
