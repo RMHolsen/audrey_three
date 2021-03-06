@@ -9,7 +9,9 @@
 <p><%= f.label :publication_date %>
 <%= f.text_field :publication_date %></p>
 
-<p><%= f.collection_check_boxes(:source_ids, Source.all, :id, :name) %></p>
+<%= f.collection_check_boxes(:source_ids, Source.all, :id, :name) do |b| %>
+    <p><%= b.check_box %> <%= b.label %></p>
+<% end %>
 
 <br>
 <%= f.submit %>

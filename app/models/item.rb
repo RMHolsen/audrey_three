@@ -16,5 +16,6 @@ class Item < ActiveRecord::Base
     #     end
     # end
 
-    #This may come in handy with the source-item relationship
+    # Not using this right now, creating a source from the source-new page, but maybe in the future.
+
 end 

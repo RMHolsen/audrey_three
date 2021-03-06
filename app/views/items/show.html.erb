@@ -13,4 +13,7 @@
     </p>
 <% end %>
 <br>
+<p>Add a Source:<br>
+<%= render 'sources/new' source: Source.new %></p>
+
 <p><%= link_to @item.list.name, list_path(@item.list) %></p>

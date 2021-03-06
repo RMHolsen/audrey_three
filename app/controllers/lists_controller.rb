@@ -8,11 +8,14 @@ class ListsController < ApplicationController
 
     def show
         @items = @list.items 
+        #For simpler iterating over in the view
     end 
 
     def new
         @list = List.new
         @topics = Topic.all 
+        #Eventually this is going to have to be restricted by user, I think. That's going to be an entire day of work, ugh.
+        #This could be where the scope method goes actually
     end 
 
     def create
@@ -20,7 +23,7 @@ class ListsController < ApplicationController
         @topic_ids = params[:list][:topic_ids]
         @topic_ids.shift
         #Why do I always have a blank one at the top
-        #Find the topic by the id in params
+        #Find the chosen topics by the id in params
         if @list.valid?
             @list.save
             #Save the list if the list is valid
@@ -38,6 +41,7 @@ class ListsController < ApplicationController
 
     def edit
         @topics = Topic.all 
+        #Again, to iterate over in the view, also going to need to be restricted by user.
     end 
 
     def update

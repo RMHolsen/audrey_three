@@ -3,6 +3,7 @@ before_action :set_source, only: [:show, :edit, :update]
     def index
         @sources = Source.all 
         #Definitely want this to be publicly available
+        #A scope method could also be used here for "show all free sources/show all paid sources"
     end 
 
     def show 
@@ -31,6 +32,14 @@ before_action :set_source, only: [:show, :edit, :update]
         else 
             render :edit 
         end 
+    end 
+
+    def free 
+        #@sources = Source.CLASS-METHOD-GOES-HERE
+    end 
+
+    def paywall
+        #@sources = Source.CLASS-METHOD-GOES-HERE
     end 
 
     #def destroy

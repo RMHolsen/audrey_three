@@ -47,7 +47,8 @@ Use the Ruby on Rails framework.
 -- Your models must include reasonable validations for the simple attributes. You don't need to add every possible validation or duplicates, such as presence and a minimum length, but the models should defend against invalid data.
     -- Lots of presence validations, not sure about format validation
 -- You must include at least one class level ActiveRecord scope method. a. Your scope method must be chainable, meaning that you must use ActiveRecord Query methods within it (such as .where and .order) rather than native ruby methods (such as #find_all or #sort).
-    -- still need to find where this makes sense to put
+    -- still need to find where this makes sense to put OH HELLO. 
+    -- Topic.where... something, but where the project belongs to the logged in user.
 -- Your application must provide standard user authentication, including signup, login, logout, and passwords.
     -- Next bit to learn, but yes.
 -- Your authentication system must also allow login from some other service. Facebook, Twitter, Foursquare, Github, etc...
@@ -69,8 +70,10 @@ Use the Ruby on Rails framework.
     Still fine
 
 ## BUG HUNT
+-- why the goddamn hell am I getting a leading "" in the topic_ids array when I make or edit a list? Does it have something to do with the way I used a collection_check_boxes object instead? What the fuck is going onnnnnn.
 
 ## Stretch Goals
 -- Add boolean attribute to projects: active/inactive, give user the ability to toggle on and off
 -- Build boolean attribute in lists: public/private, give user ability to toggle on and off
+-- Strip point-of-contact field from sources for now, add in later with a 'notes' field in case there's a scholarship available, someone wants to contact someone about getting a copy of an article, etc etc. 
 

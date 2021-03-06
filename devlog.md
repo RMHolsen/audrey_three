@@ -39,3 +39,5 @@ Cleaned up Items, Lists views
 Cleaned up Project view and controller
 Wrote tests for Items, Lists, and Projects
 Went over app flow
+Began writing Sources views, added a couple routes for paid/free specific Source index views
+Wrote a couple tests for Sources to make sure the check box/boolean process worked as advertised (it does)

@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   resources :lists do 
     resources :items 
   end 
+  
   resources :sources 
+  get '/sources/free', to: 'sources#free', as: "free_sources"
+  get '/sources/paywall', to: "sources#paywall", as: "paywall_sources"
+
   resources :users
   resources :topics 
 
