@@ -30,3 +30,12 @@ Built tests for List and Item views, passed tests
 Built Add Topic form as a partial, added to Project show view
 Built topic display method on Project show view, added if function to show links to the lists if they exist and "add a list for this topic" if they don't.
 Built tests for Project show view 
+
+## 5 March 2021
+Went over Items, Lists controllers
+Cleaned up Item, List models
+Added name_with_project method to Topic model
+Cleaned up Items, Lists views
+Cleaned up Project view and controller
+Wrote tests for Items, Lists, and Projects
+Went over app flow

@@ -1,7 +1,6 @@
-<p><%= form_for @topic do |f| %>
-    <%= f.label "Add a Topic" %>
+<%= form_for @topic do |f| %>
+    <p><%= f.label "Add a Topic" %>
     <%= f.text_field :name %><br>
     <%= f.hidden_field :project_id, value: @project.id %><br>
-    <%= f.submit %>
+    <%= f.submit %></p>
 <% end %>
-</p>

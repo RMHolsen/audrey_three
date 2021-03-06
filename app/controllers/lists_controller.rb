@@ -12,13 +12,24 @@ class ListsController < ApplicationController
 
     def new
         @list = List.new
+        @topics = Topic.all 
     end 
 
     def create
         @list = List.new(list_params)
-        #@list.project = Project.find_or_create_by(project_params)
+        @topic_ids = params[:list][:topic_ids]
+        @topic_ids.shift
+        #Why do I always have a blank one at the top
+        #Find the topic by the id in params
         if @list.valid?
             @list.save
+            #Save the list if the list is valid
+            @topic_ids.each do |t|
+                topic = Topic.find(t)
+                topic.list = @list 
+                topic.save 
+            end 
+            #Assign the list to each topic in the topic ids.
             redirect_to @list 
         else 
             render :new
@@ -26,10 +37,18 @@ class ListsController < ApplicationController
     end 
 
     def edit
+        @topics = Topic.all 
     end 
 
     def update
+        @topic_ids = params[:list][:topic_ids]
+        @topic_ids.shift 
         if @list.update(list_params)
+            @topic_ids.each do |t|
+                 topic = Topic.find(t)
+                 topic.list = @list 
+                 topic.save 
+            end 
             redirect_to @list 
         else 
             render :edit 
@@ -48,7 +67,7 @@ class ListsController < ApplicationController
     end 
 
     def list_params
-        params.require(:list).permit(:name)
+        params.require(:list).permit(:name, topic_ids: [])
     end 
 
     # def project_params

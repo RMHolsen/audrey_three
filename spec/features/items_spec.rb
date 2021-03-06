@@ -33,6 +33,15 @@ describe 'items', type: :feature do
         expect(page).to have_content(@vassar.material)
     end 
 
+    it "creates a new item for a list" do 
+        visit new_list_item_path(@list)
+        fill_in('item_name', with: 'History of Salem')
+        fill_in('item_material', with: 'book')
+        click_button('Create Item')
+        expect(@list.items.count).to eq(1)
+        expect(@list.items.last.name).to eq('History of Salem')
+    end 
+
 end 
 # create_table "items", force: :cascade do |t|
 #     t.string  "name"

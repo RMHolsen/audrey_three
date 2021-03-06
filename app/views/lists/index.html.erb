@@ -1,5 +1,5 @@
 <% @lists.each do |list| %>
     <ul>
-    <li><%= link_to list.name, list_path(list) %> -- <% list.items.count %> items</li>
+    <li><p><%= link_to list.name, list_path(list) %> -- <%= list.items.count %> items</p></li>
     </ul>
 <% end %>

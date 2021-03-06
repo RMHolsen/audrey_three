@@ -3,7 +3,7 @@
 <p><strong>Type of Resource:</strong> <%= @item.material %></p>
 <p><strong>Publication Date:</strong> <%= @item.publication_date %></p>
 
-<h3>Available At</h3>
+<h2>Available At</h2>
 <% @sources.each do |s| %>
     <p><%= s.name %> -- <%= s.location %><br>
     <% if s.fee == true %>

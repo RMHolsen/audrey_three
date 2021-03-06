@@ -47,3 +47,12 @@ fuckers
     <%= f.hidden_field :project_id, value: @project.id %>
     <%= f.submit %>
 <% end %>
+
+## PROBABLY DON'T NEED THIS
+<p><%= f.label "List" %> <%= f.text_field :name, list: "lists_autocomplete" %>
+<datalist id="lists_autocomplete">
+    <% @lists.each do |list| %>
+        <option value="<%= list.name %>">
+    <% end %>
+</datalist>
+</p>

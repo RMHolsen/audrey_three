@@ -12,23 +12,24 @@ class ItemsController < ApplicationController
 
     def new
         @item = Item.new 
-        @lists = List.all 
-        #Restrict this only to user lists when login function is built 
-        #@list = List.find(params[:list_id])
+        @list = List.find(params[:list_id])
+        #A new item for the form_for object, and since it's a nested thing find the list based on the params given
     end 
 
     def create
-        #@list = List.find(params[:list_id])
-        #@item = @list.items.build(item_params)
+        @list = List.find(params[:list_id])
         @item = Item.new(item_params)
-        @item.list = List.find_or_create_by(list_params)
+        #Find the list and instantiate the new item
         if @item.valid?
-            @item.save
-            #If @item.source_ids == true, redirect_to @list
-            #else redirect_to @list, flash message you may want to add more information about the source
+            #Check the item's validity, we need at least a name and a type of material so we know what we're looking for
+            @item = @list.items.build(item_params)
+            @item.save 
+            #Build the item and save the item
             redirect_to @list
+            #Redirect to the full list
         else
             render :new
+            #Or else do it all over again
         end 
     end 
 
@@ -38,7 +39,7 @@ class ItemsController < ApplicationController
     end 
 
     def update
-        #@list = List.find(params[:list_id])
+        @list = List.find(params[:list_id])
         if @item.update(item_params)
             redirect_to @item
         else 
@@ -56,7 +57,7 @@ class ItemsController < ApplicationController
     end 
 
     def item_params
-        params.require(:item).permit(:name, :material, :creator, :publication_date, source_ids:[], sources_attributes: [:name])
+        params.require(:item).permit(:name, :material, :creator, :publication_date, :list_id, source_ids:[], sources_attributes: [:name])
     end 
 
     def list_params

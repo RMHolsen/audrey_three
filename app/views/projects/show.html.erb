@@ -5,7 +5,7 @@
 <p><strong>Topics for Research</strong><br>
 <% @project.topics.each do |topic| %>
     <%= topic.name %> - 
-    <% if topic.list %>
+    <% if !!topic.list %>
     <%= link_to topic.list.name, list_path(topic.list) %><br>
     <% else %>
     <%= link_to "Create a wish list for this topic", new_list_path %><br>
@@ -14,5 +14,6 @@
 
 <br>
 <%= render 'topics/new' %>
+<br>
 
 <p><%= link_to "Edit Project", edit_project_path(@project) %></p>
