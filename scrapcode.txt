@@ -7,46 +7,46 @@ fuckers
 
   <%= f.check_box :status, :class => "toggle", :checked => (true if item.complete?) %>
 
-  ## LOGGED IN MENU METHOD
-  <% if logged_in? %>
-  <p><%= link_to "Create a Project", new_project_path %></p>
-  <p><%= link_to "Create a List", new_list_path %></p>
-  <p><%= link_to "View Your Projects", projects_path %></p>
-  <br>
-  <p><%= link_to "Log Out", logout_path %></p>
-  <% else %>
-  <p><%= link_to "Log In", login_path %></p>
-  <p><%= link_to "Create an Account", signup_path %></p>
-  <% end %>
-
   ## SOURCES/ITEMS CODE
-   def post_params
-    params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
-    #Category_IDs to identify the categories already existing to associate the post with
-    #Categories_attributes to create a new category to associate the post with, see: model methods
-  end
+  Drop Down Menu Code: 
+  <%= f.collection_select :genre_name, Genre.all, :name, :name %>
+  collection_select(object, method, collection, value_method, text_method)
 
-  <% Category.all.each do |c| %>
-<p><label for="category_id_<%= c.id %>"> <%= c.name %></label>
-<input type="checkbox" name="post[category_ids][]" value="<%= c.id %>" id="category_id_<%= c.id %>">
-</p>
-<% end %>
-
-  def categories_attributes=(category_attributes)
-    category_attributes.values.each do |category_attribute|
-      category = Category.find_or_create_by(category_attribute)
-      self.post_categories.build(category: category)
+  For Add A Source, views code (items/_form): 
+  <%= f.fields_for :sources, item.sources.build do |sources_fields| %>
+    <%= sources_fields.text_field :name %>
+  <% end %>
+  
+  For Add A Source, models code(Item): 
+      def sources_attributes=(source_attributes)
+        source_attributes.values.each do |source_att|
+        #Take the value of the source_attributes part of the hash in item params and iterate over its values (just the one)
+          source = Source.find_or_create_by(name: source_att)
+          byebug
+          #Assign a variable name and find or create the source by name, that being the source attribute
+          #self.item_sources.build(source: source)
+          self.sources << source 
+          #Add in the source to the join table for items to sources
+        end
     end
-  end
 
+    def sources_attributes
+        #This space intentionally left blank because what this returns populates the field in the Add a Source space.
+    end
+
+  For Add a Source: controller code(items_controller): 
+  def item_params
+        params.require(:item).permit(:name, :material, :creator, :publication_date, :list_id, source_ids:[], sources_attributes: [:name])
+        #The sources attributes must be for adding a new source by name
+        #In which case maybe if you add a new source by name redirect to that new source's edit page to fill out the junk for it.
+    end 
 
 ## WELL, THIS DIDN'T WORK
-<%= form_for @project.topics.build do |f| %>
-    <%= f.label "Add a Topic" %>
-    <%= f.text_field :name %>
-    <%= f.hidden_field :project_id, value: @project.id %>
-    <%= f.submit %>
-<% end %>
+
+<p>Add a Source:<br>
+<%= render "sources/new" @source: Source.new %></p>
+
+<p><%= @user.display_name %> has <%= @user.projects.count %> projects.</p> (dig up the pluralize method dammit)
 
 ## PROBABLY DON'T NEED THIS
 <p><%= f.label "List" %> <%= f.text_field :name, list: "lists_autocomplete" %>
@@ -61,3 +61,65 @@ fuckers
  <p><%= f.label "Cost?" %>
     <%= f.check_box :fee %><br>
     (Check if there is a fee to access material at this source, or if the source is a store.)</p>
+
+## STUFF FROM VIDEOS
+
+<%= pet.user.try(:name) %> to print the pet's owner's name. 
+def new 
+if params[:vet_id] && @vet = Vet.find(params[:vet_id]) meaning, if there is a params indicating a nested route and I can set that params equal to an instance
+@pet = @vet.pets.build 
+else 
+@pet = Pet.new
+end 
+---------------------
+If we do end up wanting to nest lists under projects, which we might do just for index?
+def index 
+ if params[:project_id] && @project = Project.find(params[:project_id])
+@lists = @project.lists 
+else 
+@lists = List.all 
+and then you can nest some search params like in the source thing in here.
+end 
+
+in the routes:
+
+resources: projects do 
+resources: lists, only: [:index]
+end 
+--------------------
+<%= f.text_field :username, required: true %> will work to prevent people from submitting if they haven't filled in the filled
+but it is NOT a substitute for validations in the model.
+--------------------
+Errors!
+Between form for and the first field 
+<ul>
+<% @user.errors.full_messages.each do |msg| %>
+<li><%= msg %> </li>
+<% end %>
+</ul>
+
+To make the error message a partial
+<%= render partial: 'layout/errors', local: {object: @thingie} %>
+
+## FROM THE ROUTES. NOT SURE WHY THIS STAYED IN THERE.
+  # resources :authors, only: [:show] do
+  # #OLD AND BUSTED
+  # #get 'authors/:id/posts', to: "authors#posts_index"
+  # #Must put the posts_index method in the controller
+  # #get 'authors/:id/posts/:post_id', to: "authors#post"
+  #   resources :posts, only: [:show, :index]
+  # end 
+
+## SCOPE FORMATS
+
+#scope :order_by_age, -> {order(:age)}
+    #scope :older_animals, -> {where("age > ?", 7)}
+    #scope :dogs, -> {where(species: "Dog")}
+    #scope :cats, -> {where(species: "Cat")}
+    #scope :fish, -> {where(species: "Fish")}
+
+    #scope :search_by_age, -> (search_age){where("age = ?", search_age)}
+
+    #in controller: @pets = Pet.search_by_age(params[:age]).order_by_age 
+
+

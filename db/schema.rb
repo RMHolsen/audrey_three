@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210226002501) do
+ActiveRecord::Schema.define(version: 20210518184858) do
 
   create_table "item_sources", force: :cascade do |t|
     t.integer "source_id"
@@ -41,13 +41,17 @@ ActiveRecord::Schema.define(version: 20210226002501) do
     t.text     "summary"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "genre"
+    t.integer  "user_id"
   end
 
   create_table "sources", force: :cascade do |t|
     t.string  "name"
     t.string  "location"
     t.string  "contact"
-    t.boolean "fee",      default: true
+    t.boolean "fee",         default: true
+    t.string  "hours"
+    t.text    "description"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -63,6 +67,7 @@ ActiveRecord::Schema.define(version: 20210226002501) do
     t.string "email"
     t.string "profile"
     t.string "password_digest"
+    t.string "display_name"
   end
 
 end

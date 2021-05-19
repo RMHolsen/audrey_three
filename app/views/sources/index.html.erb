@@ -3,11 +3,11 @@
 <% @sources.each do |s| %>
     <p><%= s.name %> -- <em><%= s.location %></em><br>
     <% if s.fee == true %>
-    There is a fee.
+    <sub>
+    $$$
+    </sub>
     <% end %>
     </p>
 <% end %>
 
-<p><%= link_to "Only Free Sources", free_sources_path %><br>
-<%= link_to "Only Paywalled Sources", paywall_sources_path %><br>
-<%= link_to "Add a Source", new_source_path %></p>
+<p><%= button_to "Add a Source", new_source_path, method: :get %></p>

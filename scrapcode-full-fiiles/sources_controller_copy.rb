@@ -2,8 +2,10 @@ class SourcesController < ApplicationController
 before_action :set_source, only: [:show, :edit, :update]
 
     def index
-        @sources = Source.all.sort { |a, b| a.name <=> b.name }
-        #All sources sorted in alphabetical order by name of source
+        @sources = Source.all 
+        #Definitely want this to be publicly available
+        #A scope method could also be used here for "show all free sources/show all paid sources"
+        #Doublecheck the petfinder video part 2
     end 
 
     def show 
@@ -14,12 +16,13 @@ before_action :set_source, only: [:show, :edit, :update]
     end 
 
     def create
+        @item = Item.find(params[:id])
         @source = Source.new(source_params)
         if @source.valid? 
             @source.save 
             redirect_to @source 
         else 
-            render :new
+            redirect_to item_path(@item)
         end 
     end 
 
@@ -35,13 +38,13 @@ before_action :set_source, only: [:show, :edit, :update]
     end 
 
     def free 
-        @sources = Source.free.sort { |a, b| a.name <=> b.name }
-        #Free sources by alphabetical order, class method in model
+        @sources = Source.free
+        #@pets = Pet.search_by_age(params[:age]).order_by_age 
     end 
 
     def paywall
-        @sources = Source.paywall.sort { |a, b| a.name <=> b.name }
-        #Paywalled sources by alphabetical order, class method in model
+        @sources = Source.paywall
+        #@pets = Pet.search_by_age(params[:age]).order_by_age 
     end 
 
     #def destroy
@@ -54,6 +57,6 @@ before_action :set_source, only: [:show, :edit, :update]
     end 
 
     def source_params
-        params.require(:source).permit(:name, :location, :contact, :fee, :hours, :description)
+        params.require(:source).permit(:name, :location, :contact, :fee)
     end 
 end 

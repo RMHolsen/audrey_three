@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-    before_action :set_topic, only: [:show, :edit, :update]
+    before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
     def index
         @topics = Topic.all 
@@ -33,8 +33,11 @@ class TopicsController < ApplicationController
         end 
     end 
 
-    #def destroy
-    #end 
+    def destroy
+        @project = @topic.project 
+        @topic.destroy
+        redirect_to @project 
+    end 
 
     private
 

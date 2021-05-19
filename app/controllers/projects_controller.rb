@@ -2,24 +2,36 @@ class ProjectsController < ApplicationController
     before_action :set_project, only: [:show, :edit, :update, :destroy]
 
     def index
-        #logged_in and current_user 
-        @projects = Project.all 
-        #Show the array of all the projects
+        if logged_in?
+            @projects = current_user.projects.all
+        end  
+        #Show the array of all the projects for the current user if a user is logged in
     end 
 
     def show
         @topic = Topic.new 
+        #Shows the project with the option of creating a new topic for the project
     end 
 
     def new
-        @project = Project.new 
+        if logged_in? 
+        #If there is a user logged in, render the new project form
+            @project = Project.new 
+        else 
+            redirect_to root_path
+        end 
+        #New project form
     end 
 
     def create
         @project = Project.new(project_params)
         #Create a new project using the fed params
+        @user = current_user 
+        #Assign the user to a variable using the helper method current_user
         if @project.valid? 
-            @project.save
+            @project.user = @user 
+            @project.save 
+            #This should be able to be refactored slightly to @user.project.build? look into it
             redirect_to project_path(@project)
             #If the project is valid according to all validations in the model, save the project
             #Redirect to show the project
@@ -44,14 +56,22 @@ class ProjectsController < ApplicationController
     end 
 
     def destroy
+         Topic.all.each do |t|
+            if t.project_id == @project.id 
+               t.destroy
+            end 
+            #Could this be a ternary operator?
+         end 
+         #Filter through all the topics and delete all the ones pertaining to the project to be deleted
          @project.destroy 
+         #Then delete the project
          redirect_to projects_path
     end 
 
     private
 
     def project_params
-        params.require(:project).permit(:name, :description, :summary, :created_at, :updated_at)
+        params.require(:project).permit(:name, :description, :summary, :genre, :created_at, :updated_at)
     end 
 
     def set_project 

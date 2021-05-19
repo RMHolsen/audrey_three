@@ -2,6 +2,7 @@
 <p><strong>By:</strong> <%= @item.creator %></p>
 <p><strong>Type of Resource:</strong> <%= @item.material %></p>
 <p><strong>Publication Date:</strong> <%= @item.publication_date %></p>
+<p><strong>Appears on Wish List:</strong> <%= @item.list.name %></p>
 
 <h2>Available At</h2>
 <% @sources.each do |s| %>
@@ -13,7 +14,5 @@
     </p>
 <% end %>
 <br>
-<p>Add a Source:<br>
-<%= render 'sources/new' source: Source.new %></p>
 
-<p><%= link_to @item.list.name, list_path(@item.list) %></p>
+<p><%= button_to "Edit This Item", edit_list_item_path(@item.list, @item), method: :get %></p>
